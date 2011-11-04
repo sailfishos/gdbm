@@ -1,8 +1,0 @@
-<package project="Mer:Trunk:Base" name="gdbm">
-  <title>GNU Database Routines</title>
-  <description>A static and dynamic library for the GNU database routines.
-
-
-</description>
-  <url>http://directory.fsf.org/GNU/gdbm.html</url>
-</package>
