@@ -4,7 +4,7 @@ Version: 1.8.3
 Release: 1
 Group: System/Libraries
 License: GPLv2+ and LGPLv2+
-URL: http://directory.fsf.org/GNU/gdbm.html
+URL: http://www.gnu.org.ua/software/gdbm
 Sources:
     - http://ftp.gnu.org/pub/gnu/gdbm/gdbm-%{version}.tar.bz2
 Patches:

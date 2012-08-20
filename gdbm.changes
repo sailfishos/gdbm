@@ -1,3 +1,7 @@
+* Mon Aug 20 2012 Antti Alatarvas <antti.alatarvas@gmail.com> - 1.8.3
+- Changed .yaml URL
+- Fixes MER#253 : gdbm yaml file has invalid URL entry
+
 * Mon May 30 2011 Carsten Munk <carsten@maemo.org> - 1.8.3
 - Fix ARM build: Drop awkward part of gdbm-destdir.patch which overrode
   autoconf details and hardcoded X86 CFLAGS. Verified to work on both 
