@@ -22,6 +22,8 @@ Patch2:     gdbm-prototype_static_functions.patch
 Patch3:     gdbm-fix_testprogs.patch
 Patch4:     gdbm-destdir.patch
 Patch5:     gdbm-stamp.patch
+Patch6:     gdbm-aarch64.patch
+
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
@@ -54,6 +56,7 @@ to develop applications that require these.
 %patch4 -p1
 # gdbm-stamp.patch
 %patch5 -p1
+%patch6 -p1
 # >> setup
 # << setup
 
