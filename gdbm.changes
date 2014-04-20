@@ -1,3 +1,6 @@
+* Thu Jan 23 2014 Oleg Girko <oleg.girko@jolla.com> - 1.8.3
+- Add aarch64 support
+
 * Mon Aug 20 2012 Antti Alatarvas <antti.alatarvas@gmail.com> - 1.8.3
 - Changed .yaml URL
 - Fixes MER#253 : gdbm yaml file has invalid URL entry
