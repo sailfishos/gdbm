@@ -1,21 +1,19 @@
 Name:       gdbm
 Summary:    GNU Database Routines
-Version:    1.8.3
-Release:    2
+Version:    1.18.1
+Release:    1
 Group:      System/Libraries
-License:    GPLv2+ and LGPLv2+
+License:    GPLv3+ and LGPLv3+
 URL:        http://www.gnu.org.ua/software/gdbm
-Source0:    http://ftp.gnu.org/pub/gnu/gdbm/gdbm-%{version}.tar.bz2
-Patch0:     gdbm-%{version}.dif
-Patch1:     gdbm-protoize_dbm_headers.patch
-Patch2:     gdbm-prototype_static_functions.patch
-Patch3:     gdbm-fix_testprogs.patch
-Patch4:     gdbm-destdir.patch
-Patch5:     gdbm-stamp.patch
-Patch6:     gdbm-aarch64.patch
+Source0:    %{name}-%{version}.tar.bz2
 
-Requires(post): /sbin/ldconfig
+Requires(post):   /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
+
+BuildRequires:    bison
+BuildRequires:    flex
+BuildRequires:    gettext
+BuildRequires:    texinfo
 
 %description
 A static and dynamic library for the GNU database routines.
@@ -39,25 +37,10 @@ Obsoletes: %{name}-docs
 Man and info pages for %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}
-
-# gdbm-%{version}.dif
-%patch0 -p1
-# gdbm-protoize_dbm_headers.patch
-%patch1 -p1
-# gdbm-prototype_static_functions.patch
-%patch2 -p1
-# gdbm-fix_testprogs.patch
-%patch3 -p1
-# gdbm-destdir.patch
-%patch4 -p1
-# gdbm-stamp.patch
-%patch5 -p1
-%patch6 -p1
+%setup -q -n %{name}-%{version}/upstream
 
 %build
-aclocal
-autoreconf --force --install
+autoreconf --force --install --verbose
 export CFLAGS="$RPM_OPT_FLAGS -Wa,--noexecstack"
 
 %configure --disable-static
@@ -67,9 +50,9 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 %make_install
 
-mkdir -p $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
-install -m0644 -t $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} \
-        ChangeLog NEWS README
+mkdir -p "%{buildroot}%{_docdir}/%{name}-%{version}"
+install -m 0644 -t "%{buildroot}%{_docdir}/%{name}-%{version}" \
+        ChangeLog.cvs NOTE-WARNING NEWS README
 
 %post -p /sbin/ldconfig
 
@@ -78,16 +61,20 @@ install -m0644 -t $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} \
 %files
 %defattr(-,root,root,-)
 %license COPYING
-%{_prefix}/%{_lib}/libgdbm.so.3
-%{_prefix}/%{_lib}/libgdbm.so.3.0.0
+
+%{_bindir}/gdbm_dump
+%{_bindir}/gdbmtool
+%{_bindir}/gdbm_load
+%{_libdir}/libgdbm.so.6
+%{_libdir}/libgdbm.so.6.0.0
 
 %files devel
 %defattr(-,root,root,-)
-%{_prefix}/%{_lib}/libgdbm.so
-/usr/include/gdbm.h
+%{_includedir}/gdbm.h
+%{_libdir}/libgdbm.so
 
 %files doc
 %defattr(-,root,root,-)
-%{_infodir}/%{name}*.*
-%{_mandir}/man*/*%{name}.*
+%{_infodir}/*
+%{_mandir}/man*/*
 %{_docdir}/%{name}-%{version}
