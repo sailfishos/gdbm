@@ -1,8 +1,7 @@
 Name:       gdbm
 Summary:    GNU Database Routines
-Version:    1.18.1
+Version:    1.23
 Release:    1
-Group:      System/Libraries
 License:    GPLv3+ and LGPLv3+
 URL:        http://www.gnu.org.ua/software/gdbm
 Source0:    %{name}-%{version}.tar.bz2
@@ -20,7 +19,6 @@ A static and dynamic library for the GNU database routines.
 
 %package devel
 Summary:    Include Files and Libraries mandatory for Development
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
@@ -29,7 +27,6 @@ to develop applications that require these.
 
 %package doc
 Summary:   Documentation for %{name}
-Group:     Documentation
 Requires:  %{name} = %{version}-%{release}
 Obsoletes: %{name}-docs
 
@@ -37,17 +34,16 @@ Obsoletes: %{name}-docs
 Man and info pages for %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}/upstream
+%autosetup -n %{name}-%{version}/upstream
 
 %build
 autoreconf --force --install --verbose
 export CFLAGS="$RPM_OPT_FLAGS -Wa,--noexecstack"
 
 %configure --disable-static
-make %{?_smp_mflags}
+%make_build
 
 %install
-rm -rf %{buildroot}
 %make_install
 
 mkdir -p "%{buildroot}%{_docdir}/%{name}-%{version}"
