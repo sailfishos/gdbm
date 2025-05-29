@@ -1,9 +1,9 @@
 Name:       gdbm
 Summary:    GNU Database Routines
-Version:    1.23
+Version:    1.25
 Release:    1
 License:    GPLv3+ and LGPLv3+
-URL:        http://www.gnu.org.ua/software/gdbm
+URL:        https://github.com/sailfishos/gdbm
 Source0:    %{name}-%{version}.tar.bz2
 
 Requires(post):   /sbin/ldconfig
@@ -55,9 +55,7 @@ install -m 0644 -t "%{buildroot}%{_docdir}/%{name}-%{version}" \
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %license COPYING
-
 %{_bindir}/gdbm_dump
 %{_bindir}/gdbmtool
 %{_bindir}/gdbm_load
@@ -65,12 +63,10 @@ install -m 0644 -t "%{buildroot}%{_docdir}/%{name}-%{version}" \
 %{_libdir}/libgdbm.so.6.0.0
 
 %files devel
-%defattr(-,root,root,-)
 %{_includedir}/gdbm.h
 %{_libdir}/libgdbm.so
 
 %files doc
-%defattr(-,root,root,-)
 %{_infodir}/*
 %{_mandir}/man*/*
 %{_docdir}/%{name}-%{version}
